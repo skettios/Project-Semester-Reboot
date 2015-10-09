@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.skettios.lpreboot.gfx.RenderEngine;
 
-public class SpriteRenderer extends Renderer
+public class SpriteRenderer extends Renderer<SpriteRenderer>
 {
     private Sprite sprite;
     private RenderEngine.RenderType type;
@@ -14,14 +14,20 @@ public class SpriteRenderer extends Renderer
     {
         this.sprite = sprite;
         this.type = type;
-
-        sprite.setPosition(owner.transform.position.x, owner.transform.position.y);
-        sprite.setRotation(owner.transform.rotation);
     }
 
     public SpriteRenderer(Texture texture, RenderEngine.RenderType type)
     {
         this(new Sprite(texture), type);
+    }
+
+    @Override
+    public void onAdd()
+    {
+        super.onAdd();
+
+        sprite.setPosition(owner.transform.position.x, owner.transform.position.y);
+        sprite.setRotation(owner.transform.rotation);
     }
 
     @Override
@@ -41,9 +47,6 @@ public class SpriteRenderer extends Renderer
 
         if (sprite.getX() != owner.transform.position.x || sprite.getY() != owner.transform.position.y)
             sprite.setPosition(owner.transform.position.x, owner.transform.position.y);
-
-        if (sprite.getRotation() != owner.transform.rotation)
-            sprite.setRotation(owner.transform.rotation);
 
         sprite.draw(batch);
     }

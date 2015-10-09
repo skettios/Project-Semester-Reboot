@@ -1,6 +1,5 @@
 package com.skettios.lpreboot.entity;
 
-import com.badlogic.gdx.math.Vector2;
 import com.skettios.lpreboot.entity.component.Component;
 import com.skettios.lpreboot.entity.component.Transform;
 

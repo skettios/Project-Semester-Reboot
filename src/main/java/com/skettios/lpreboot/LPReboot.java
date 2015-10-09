@@ -1,52 +1,54 @@
 package com.skettios.lpreboot;
 
-import java.io.File;
-
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.SharedLibraryLoader;
 import com.kotcrab.vis.ui.VisUI;
 import com.naef.jnlua.NativeSupport;
 import com.naef.jnlua.NativeSupport.Loader;
-import com.skettios.lpreboot.entity.component.SpriteRenderer;
 import com.skettios.lpreboot.gfx.RenderEngine;
+import com.skettios.lpreboot.state.StateEngine;
+import com.skettios.lpreboot.state.States;
+
+import java.io.File;
 
 public class LPReboot extends ApplicationAdapter
 {
     private static LPReboot instance;
 
     private RenderEngine renderEngine;
+    private StateEngine stateEngine;
 
     public static void main(String[] args)
     {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.width = 800;
         config.height = 600;
+        config.resizable = false;
         config.addIcon("icon.png", FileType.Internal);
 
         NativeLoader.load();
 
         new LwjglApplication(new LPReboot(), config);
     }
-    
+
     @Override
     public void create()
     {
         configureGame();
 
-        renderEngine = new RenderEngine();
-        renderEngine.add(new SpriteRenderer(new Texture(Gdx.files.absolute("assets/textures/background.png")), RenderEngine.RenderType.WINDOW_BG));
-        renderEngine.add(new SpriteRenderer(new Texture(Gdx.files.absolute("assets/textures/game_background.png")), RenderEngine.RenderType.GAME_BG));
-        renderEngine.add(new SpriteRenderer(new Texture(Gdx.files.absolute("assets/textures/player.png")), RenderEngine.RenderType.GAME_FG));
-
         instance = this;
+
+        renderEngine = new RenderEngine();
+        stateEngine = new StateEngine();
+
+        stateEngine.pushState(States.MAIN_MENU);
     }
 
     @Override
@@ -54,6 +56,7 @@ public class LPReboot extends ApplicationAdapter
     {
         // Update
         handleGlobalKeyCombinations();
+        stateEngine.update(1f / 60f);
 
         // Render
         renderEngine.render(1f / 60f);
@@ -69,10 +72,15 @@ public class LPReboot extends ApplicationAdapter
         return renderEngine;
     }
 
+    public StateEngine getStateEngine()
+    {
+        return stateEngine;
+    }
+
     private void configureGame()
     {
         Box2D.init();
-        
+
         VisUI.load();
         Gdx.input.setCursorCatched(true);
     }
@@ -91,7 +99,7 @@ public class LPReboot extends ApplicationAdapter
             }
         }
     }
-    
+
     protected static class NativeLoader
     {
         public static void load()

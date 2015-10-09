@@ -2,6 +2,7 @@ package com.skettios.lpreboot.gfx;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.*;
 
@@ -33,14 +34,34 @@ public class RenderEngine
 
     public RenderEngine()
     {
-        windowView = new ScalingViewport(Scaling.none, 800, 600);
+        windowView = new ScalingViewport(Scaling.fit, 800, 600);
         gameView = new ScalingViewport(Scaling.none, 400, 570);
+
+        windowView.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
+        gameView.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
+
+        gameView.getCamera().position.set(0, 0, 0);
 
         layers.add(windowBG = new RenderLayer(RenderType.WINDOW_BG));
         layers.add(gameBG = new RenderLayer(RenderType.GAME_BG));
         layers.add(gameFG = new RenderLayer(RenderType.GAME_FG));
         layers.add(gameGUI = new RenderLayer(RenderType.GAME_GUI));
         layers.add(windowGUI = new RenderLayer(RenderType.WINDOW_GUI));
+    }
+
+    public Viewport getViewForType(RenderType type)
+    {
+        switch (type)
+        {
+            case WINDOW_GUI:
+                return windowView;
+
+            case GAME_GUI:
+                return gameView;
+
+            default:
+                return null;
+        }
     }
 
     public void add(IRenderer renderer)
@@ -95,18 +116,18 @@ public class RenderEngine
     {
         Gdx.gl.glClear(Gdx.gl20.GL_COLOR_BUFFER_BIT | Gdx.gl20.GL_DEPTH_BUFFER_BIT);
 
-        windowView.setScreenSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        windowView.apply();
+        windowView.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
 
         batch.begin();
+        batch.setProjectionMatrix(windowView.getCamera().combined);
         windowBG.render(batch, deltaTime);
         batch.end();
 
-        gameView.setScreenPosition(15, 15);
-        gameView.setScreenSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        gameView.apply();
+        gameView.setScreenBounds(15, 15, 400, 570);
+        gameView.apply(true);
 
         batch.begin();
+        batch.setProjectionMatrix(gameView.getCamera().combined);
         gameBG.render(batch, deltaTime);
         batch.end();
 
@@ -118,13 +139,11 @@ public class RenderEngine
         gameGUI.render(batch, deltaTime);
         batch.end();
 
-        windowView.setScreenSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        windowView.apply();
+        windowView.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
 
         batch.begin();
+        batch.setProjectionMatrix(windowView.getCamera().combined);
         windowGUI.render(batch, deltaTime);
         batch.end();
-
-        System.out.println(batch.totalRenderCalls);
     }
 }

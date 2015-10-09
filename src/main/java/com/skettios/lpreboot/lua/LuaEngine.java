@@ -9,7 +9,7 @@ import javax.script.ScriptException;
 import com.badlogic.gdx.files.FileHandle;
 import com.naef.jnlua.script.LuaScriptEngineFactory;
 
-public final class LuaEngine
+public class LuaEngine
 {
     private LuaScriptEngineFactory factory = new LuaScriptEngineFactory();
     private ScriptEngine engine = factory.getScriptEngine();
@@ -27,6 +27,7 @@ public final class LuaEngine
         }
         catch (ScriptException e)
         {
+            e.printStackTrace();
         }
 
         return null;
@@ -40,6 +41,7 @@ public final class LuaEngine
         }
         catch (Exception e)
         {
+            e.printStackTrace();
         }
 
         return null;
