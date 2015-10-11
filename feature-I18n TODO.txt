@@ -1,3 +1,2 @@
 TODO:
-    - Parser to take in a json file name something like en_US.json into categories or just plain straight translation.
-    - Clean way to store the keys->translations for easy access.
+	- Make parser parse multiple categories.

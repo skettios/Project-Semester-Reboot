@@ -21,6 +21,7 @@ import com.skettios.lpreboot.gui.Gui;
 import com.skettios.lpreboot.scene.Scene;
 import com.skettios.lpreboot.scene.SceneGame;
 import com.skettios.lpreboot.scene.SceneMainMenu;
+import com.skettios.lpreboot.util.I18n;
 
 public class States
 {
@@ -87,7 +88,7 @@ public class States
                 Table innerTable = new Table(VisUI.getSkin());
                 innerTable.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.absolute("assets/textures/textbar.png")))));
 
-                innerTable.add(new VisLabel("This is a test"));
+                innerTable.add(new VisLabel(I18n.i18n("gui.player_1")));
                 innerTable.align(Align.topLeft);
                 innerTable.padLeft(10);
                 innerTable.padTop(10);

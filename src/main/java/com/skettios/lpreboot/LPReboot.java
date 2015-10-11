@@ -15,6 +15,8 @@ import com.naef.jnlua.NativeSupport.Loader;
 import com.skettios.lpreboot.gfx.RenderEngine;
 import com.skettios.lpreboot.state.StateEngine;
 import com.skettios.lpreboot.state.States;
+import com.skettios.lpreboot.util.I18n;
+import com.skettios.lpreboot.util.Properties;
 
 import java.io.File;
 
@@ -79,7 +81,12 @@ public class LPReboot extends ApplicationAdapter
 
     private void configureGame()
     {
-        Box2D.init();
+        Properties.load();
+
+        I18n.load();
+
+        System.out.println(I18n.i18n("test"));
+        System.out.println(I18n.i18n("gui.test"));
 
         VisUI.load();
         Gdx.input.setCursorCatched(true);
