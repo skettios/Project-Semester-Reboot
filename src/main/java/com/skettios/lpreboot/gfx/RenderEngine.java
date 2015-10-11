@@ -125,21 +125,19 @@ public class RenderEngine
         Gdx.gl.glClear(Gdx.gl20.GL_COLOR_BUFFER_BIT | Gdx.gl20.GL_DEPTH_BUFFER_BIT);
 
         windowView.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
+        batch.setProjectionMatrix(windowView.getCamera().combined);
 
         batch.begin();
-        batch.setProjectionMatrix(windowView.getCamera().combined);
         windowBG.render(batch, deltaTime);
         batch.end();
 
         gameView.setScreenBounds(15, 15, 400, 570);
         gameView.apply(true);
 
-        batch.begin();
         batch.setProjectionMatrix(gameView.getCamera().combined);
-        gameBG.render(batch, deltaTime);
-        batch.end();
 
         batch.begin();
+        gameBG.render(batch, deltaTime);
         gameFG.render(batch, deltaTime);
         batch.end();
 
@@ -148,9 +146,9 @@ public class RenderEngine
         batch.end();
 
         windowView.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
+        batch.setProjectionMatrix(windowView.getCamera().combined);
 
         batch.begin();
-        batch.setProjectionMatrix(windowView.getCamera().combined);
         windowFG.render(batch, deltaTime);
         batch.end();
 
