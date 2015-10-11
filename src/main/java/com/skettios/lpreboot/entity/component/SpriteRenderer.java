@@ -48,6 +48,9 @@ public class SpriteRenderer extends Renderer<SpriteRenderer>
         if (sprite.getX() != owner.transform.position.x || sprite.getY() != owner.transform.position.y)
             sprite.setPosition(owner.transform.position.x, owner.transform.position.y);
 
+        if (sprite.getRotation() != owner.transform.rotation)
+            sprite.setRotation(owner.transform.rotation);
+
         sprite.draw(batch);
     }
 }

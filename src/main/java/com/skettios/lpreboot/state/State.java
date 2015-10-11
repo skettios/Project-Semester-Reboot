@@ -1,6 +1,5 @@
 package com.skettios.lpreboot.state;
 
-import com.badlogic.gdx.Input;
 
 public abstract class State
 {

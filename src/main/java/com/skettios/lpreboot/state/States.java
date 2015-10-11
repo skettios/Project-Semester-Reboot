@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Timer;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.skettios.lpreboot.LPReboot;
@@ -15,6 +16,7 @@ import com.skettios.lpreboot.entity.Entity;
 import com.skettios.lpreboot.entity.component.Script;
 import com.skettios.lpreboot.entity.component.SpriteRenderer;
 import com.skettios.lpreboot.gfx.RenderEngine;
+import com.skettios.lpreboot.gfx.TransitionTween;
 import com.skettios.lpreboot.gui.Gui;
 import com.skettios.lpreboot.scene.Scene;
 import com.skettios.lpreboot.scene.SceneGame;
@@ -39,6 +41,12 @@ public class States
                 table.add(cont);
                 table.row();
                 table.add(exit);
+            }
+
+            @Override
+            public void onFocus()
+            {
+
             }
         };
 
@@ -86,6 +94,12 @@ public class States
 
                 table.align(Align.bottom);
                 table.add(innerTable);
+            }
+
+            @Override
+            public void onFocus()
+            {
+
             }
         };
 
@@ -137,27 +151,84 @@ public class States
     {
         private Scene scene = new SceneGame();
 
-        private Entity background = new Entity();
+        private Gui gui = new Gui(RenderEngine.RenderType.WINDOW_GUI)
+        {
+            @Override
+            public void initialize()
+            {
+                addComponent(new SpriteRenderer(new Texture(Gdx.files.absolute("assets/textures/pause_background.png")), RenderEngine.RenderType.WINDOW_FG).setAlpha(0));
+
+                VisLabel paused = new VisLabel("Paused");
+                VisLabel resume = new VisLabel("Press Escape to Resume");
+                VisLabel quit = new VisLabel("Press Q to Exit");
+
+                paused.setColor(Color.GREEN);
+                resume.setColor(Color.GREEN);
+                quit.setColor(Color.GREEN);
+
+                table.add(paused);
+                table.row();
+                table.add(resume);
+                table.row();
+                table.add(quit);
+            }
+
+            @Override
+            public void onFocus()
+            {
+                table.setPosition(0, -500);
+                gui.getComponent(SpriteRenderer.class).setAlpha(0);
+            }
+
+            @Override
+            public void update(float deltaTime)
+            {
+                super.update(deltaTime);
+                System.out.println(table.getY());
+                float newPos = Math.min(0, table.getY() + 5);
+                table.setPosition(0, newPos);
+            }
+        };
+        private TransitionTween fadeIn;
 
         @Override
         public void onPush()
         {
-            background.addComponent(new SpriteRenderer(new Texture(Gdx.files.absolute("assets/textures/pause_background.png")), RenderEngine.RenderType.WINDOW_GUI).setAlpha(0.5f));
-
-            scene.addEntity(background);
-
+            scene.addEntity(gui);
+            fadeIn = new TransitionTween(TransitionTween.TransitionType.FADE_IN, gui.getComponent(SpriteRenderer.class));
             States.GAME.pause();
         }
 
         @Override
         public void onPop()
         {
-            States.GAME.unpause();
+            scene.clearEntities();
+            Timer.schedule(new Timer.Task()
+            {
+                @Override
+                public void run()
+                {
+                    States.GAME.unpause();
+                }
+            }, 0.05f);
         }
 
         @Override
         public void update(float deltaTime)
         {
+            scene.update(deltaTime);
+
+            if (fadeIn.doTransition(0.05f))
+            {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
+                    LPReboot.getInstance().getStateEngine().popState();
+
+                if (Gdx.input.isKeyJustPressed(Input.Keys.Q))
+                {
+                    LPReboot.getInstance().getStateEngine().popState();
+                    LPReboot.getInstance().getStateEngine().popState();
+                }
+            }
         }
     };
 }

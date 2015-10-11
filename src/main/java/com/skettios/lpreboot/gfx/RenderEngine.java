@@ -2,7 +2,6 @@ package com.skettios.lpreboot.gfx;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.*;
 
@@ -14,6 +13,7 @@ public class RenderEngine
     public enum RenderType
     {
         WINDOW_BG,
+        WINDOW_FG,
         WINDOW_GUI,
         GAME_BG,
         GAME_FG,
@@ -27,6 +27,7 @@ public class RenderEngine
     private Viewport gameView;
 
     private RenderLayer windowBG;
+    private RenderLayer windowFG;
     private RenderLayer windowGUI;
     private RenderLayer gameBG;
     private RenderLayer gameFG;
@@ -46,6 +47,7 @@ public class RenderEngine
         layers.add(gameBG = new RenderLayer(RenderType.GAME_BG));
         layers.add(gameFG = new RenderLayer(RenderType.GAME_FG));
         layers.add(gameGUI = new RenderLayer(RenderType.GAME_GUI));
+        layers.add(windowFG = new RenderLayer(RenderType.WINDOW_FG));
         layers.add(windowGUI = new RenderLayer(RenderType.WINDOW_GUI));
     }
 
@@ -71,6 +73,9 @@ public class RenderEngine
             case WINDOW_BG:
                 windowBG.add(renderer);
                 break;
+            case WINDOW_FG:
+                windowFG.add(renderer);
+                break;
             case WINDOW_GUI:
                 windowGUI.add(renderer);
                 break;
@@ -94,6 +99,9 @@ public class RenderEngine
         {
             case WINDOW_BG:
                 windowBG.remove(renderer);
+                break;
+            case WINDOW_FG:
+                windowFG.remove(renderer);
                 break;
             case WINDOW_GUI:
                 windowGUI.remove(renderer);
@@ -143,6 +151,10 @@ public class RenderEngine
 
         batch.begin();
         batch.setProjectionMatrix(windowView.getCamera().combined);
+        windowFG.render(batch, deltaTime);
+        batch.end();
+
+        batch.begin();
         windowGUI.render(batch, deltaTime);
         batch.end();
     }

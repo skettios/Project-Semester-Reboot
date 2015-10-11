@@ -80,6 +80,9 @@ distributions {
         baseName = "${appName}"
         contents {
             from { 'build/libs' }
+			from files('build/resources/main') { 
+				exclude 'icon.png'
+			}
         }
     }
 }
@@ -126,9 +129,7 @@ task buildJar(dependsOn: classes, type: Jar) {
 	
     from files(sourceSets.main.output.classesDir)
     from files(sourceSets.main.output.resourcesDir) {
-		exclude 'base'
-		exclude 'assets.textures'
-		exclude 'audio'
+		excludes ['assets']
 	}
     from {configurations.compile.collect {zipTree(it)}}
 

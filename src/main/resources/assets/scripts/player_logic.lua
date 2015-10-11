@@ -1,11 +1,4 @@
-function initialize(entity)
-end
-
-function onAdd(entity)
-end
-
-function onRemove(entity)
-end
+local rotation = 0
 
 function update(entity, deltaTime)
     System.out:println(entity.transform.position)
@@ -20,4 +13,7 @@ function update(entity, deltaTime)
     elseif Gdx.input:isKeyPressed(Keys.DOWN) then
         entity.transform:move(0, -10)
     end
+
+    entity.transform.rotation = rotation
+    rotation = rotation + 15
 end

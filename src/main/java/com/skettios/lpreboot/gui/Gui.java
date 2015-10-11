@@ -25,9 +25,16 @@ public abstract class Gui extends Entity
 
         initialize();
 
-        stage.setDebugAll(true);
+        stage.setDebugAll(false);
         table.setFillParent(true);
         stage.addActor(table);
+    }
+
+    @Override
+    public void onAdd()
+    {
+        super.onAdd();
+        onFocus();
     }
 
     @Override
@@ -38,4 +45,5 @@ public abstract class Gui extends Entity
     }
 
     public abstract void initialize();
+    public abstract void onFocus();
 }
