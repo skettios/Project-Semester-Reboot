@@ -123,7 +123,7 @@ task run(dependsOn: [classes, copyResources], type: JavaExec) {
 }
 
 task buildJar(dependsOn: classes, type: Jar) {
-	archiveName = 'Summer-Project.jar'
+	archiveName = "${config.appName}.jar"
 
 	delete('build/libs')
 	
