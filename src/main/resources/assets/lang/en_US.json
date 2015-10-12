@@ -1,7 +1,7 @@
 {
-    "test": "This is a translation without a category!",
     "gui": {
-        "test": "This is a translation with a category!",
-        "player_1": "Princess"
+        "game": {
+            "player_1": "Princess"
+        }
     }
 }

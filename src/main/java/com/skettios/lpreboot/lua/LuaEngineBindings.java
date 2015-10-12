@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.skettios.lpreboot.util.I18n;
 
 import javax.script.SimpleBindings;
 import java.util.Random;
@@ -26,5 +27,8 @@ public class LuaEngineBindings extends SimpleBindings
         put("Keys", Input.Keys.class);
         put("Sprite", Sprite.class);
         put("Texture", Texture.class);
+
+        // LPR Classes
+        put("I18n", I18n.class);
     }
 }

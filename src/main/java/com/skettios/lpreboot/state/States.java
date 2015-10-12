@@ -88,7 +88,7 @@ public class States
                 Table innerTable = new Table(VisUI.getSkin());
                 innerTable.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.absolute("assets/textures/textbar.png")))));
 
-                innerTable.add(new VisLabel(I18n.i18n("gui.player_1")));
+                innerTable.add(new VisLabel(I18n.i18n("gui.game.player_1")));
                 innerTable.align(Align.topLeft);
                 innerTable.padLeft(10);
                 innerTable.padTop(10);
@@ -100,7 +100,6 @@ public class States
             @Override
             public void onFocus()
             {
-
             }
         };
 
@@ -143,8 +142,6 @@ public class States
                 LPReboot.getInstance().getStateEngine().pushState(States.PAUSED);
 
             scene.update(deltaTime);
-
-            System.out.println("BG" + gameBG.transform.position);
         }
     };
 
@@ -185,7 +182,6 @@ public class States
             public void update(float deltaTime)
             {
                 super.update(deltaTime);
-                System.out.println(table.getY());
                 float newPos = Math.min(0, table.getY() + 5);
                 table.setPosition(0, newPos);
             }

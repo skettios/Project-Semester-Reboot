@@ -85,9 +85,6 @@ public class LPReboot extends ApplicationAdapter
 
         I18n.load();
 
-        System.out.println(I18n.i18n("test"));
-        System.out.println(I18n.i18n("gui.test"));
-
         VisUI.load();
         Gdx.input.setCursorCatched(true);
     }

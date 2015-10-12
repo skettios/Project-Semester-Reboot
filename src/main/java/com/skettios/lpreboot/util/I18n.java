@@ -11,33 +11,34 @@ import java.util.Map;
 public class I18n
 {
     private static final FileHandle langDir = Gdx.files.absolute("assets/lang");
-    private static Map<String, I18nContainer> translations;
+    private static I18nContainer translation;
 
     public static void load()
     {
-        translations = getTranslations(getLanguageFiles(langDir));
+        translation = getTranslation(Properties.LANGUAGE);
     }
 
-    private static FileHandle[] getLanguageFiles(FileHandle dir)
+    public static void reload(String langCode)
     {
-        return dir.list(".json");
+        System.out.println("RELOAD");
+        translation = getTranslation(langCode);
     }
 
     public static String i18n(String key)
     {
-        return translations.get(Properties.LANGUAGE).translations.get(key);
+        return translation.translations.get(key);
     }
 
-    private static Map<String, I18nContainer> getTranslations(FileHandle[] langFiles)
+    private static I18nContainer getTranslation(String langCode)
     {
-        Map<String, I18nContainer> ret = new HashMap<String, I18nContainer>();
-        String langCode = "";
+        FileHandle[] langFiles = langDir.list(".json");
         for (int i = 0; i < langFiles.length; i++)
         {
-            langCode = langFiles[i].nameWithoutExtension();
-            ret.put(langCode, new I18nContainer(langCode, langFiles[i]));
+            if (langFiles[i].nameWithoutExtension().equalsIgnoreCase(langCode))
+                return new I18nContainer(langCode, langFiles[i]);
         }
-        return ret;
+
+        return null;
     }
 
     protected static class I18nContainer
@@ -56,44 +57,53 @@ public class I18n
             Map<String, String> ret = new HashMap<String, String>();
             JsonValue langFileParsed = new JsonReader().parse(langFile);
             JsonValue.JsonIterator langFileIterator = langFileParsed.iterator();
-            String category = "";
             String key = "";
-            String value = "";
             while (langFileIterator.hasNext())
             {
                 JsonValue translation = langFileIterator.next();
                 if (translation.isObject())
                 {
-                    category = translation.name();
-                    JsonValue.JsonIterator innerIterator = translation.iterator();
-                    if (innerIterator == null)
-                    {
-                        System.out.println("innerIterator is null!");
-                        continue;
-                    }
-
-                    while (innerIterator.hasNext())
-                    {
-                        JsonValue innerValue = innerIterator.next();
-                        key = category + "." + innerValue.name();
-                        value = innerValue.asString();
-
-                        ret.put(key, value);
-                    }
+                    key = translation.name();
+                    parseObject(translation, ret, key);
                 }
                 else if (translation.isString())
                 {
                     key = translation.name();
-                    value = translation.asString();
-
-                    ret.put(key, value);
+                    ret.put(key, translation.asString());
                 }
                 else
                 {
                     continue;
                 }
             }
+
             return ret;
+        }
+
+        private void parseObject(JsonValue value, Map<String, String> map, String key)
+        {
+            String defaultKey = key;
+
+            if (value.isObject())
+            {
+                JsonValue.JsonIterator iterator = value.iterator();
+                while (iterator.hasNext())
+                {
+                    key = defaultKey;
+
+                    JsonValue innerValue = iterator.next();
+                    if (innerValue.isObject())
+                    {
+                        key += "." + innerValue.name();
+                        parseObject(innerValue, map, key);
+                    }
+                    else
+                    {
+                        key += "." + innerValue.name();
+                        map.put(key, innerValue.asString());
+                    }
+                }
+            }
         }
     }
 }
