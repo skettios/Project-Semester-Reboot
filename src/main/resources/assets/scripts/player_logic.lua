@@ -13,10 +13,6 @@ function update(entity, deltaTime)
         entity.transform:move(0, -10)
     end
 
-    if Gdx.input:isKeyJustPressed(Keys.R) then
-        I18n:reload('en_US')
-    end
-
     entity.transform.rotation = rotation
     rotation = rotation + 15
 end

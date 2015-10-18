@@ -1,5 +1,10 @@
 {
     "gui": {
+        "menu": {
+            "title": "Lunatic Princess Reboot",
+            "new_game": "New Game",
+            "exit": "Exit"
+        },
         "game": {
             "player_1": "Princess"
         }

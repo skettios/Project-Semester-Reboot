@@ -1,11 +1,14 @@
 package com.skettios.lpreboot.gui;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.kotcrab.vis.ui.VisUI;
 import com.skettios.lpreboot.LPReboot;
 import com.skettios.lpreboot.entity.Entity;
 import com.skettios.lpreboot.gfx.RenderEngine;
+import com.skettios.lpreboot.util.Properties;
 
 public abstract class Gui extends Entity
 {
@@ -25,7 +28,7 @@ public abstract class Gui extends Entity
 
         initialize();
 
-        stage.setDebugAll(false);
+        stage.setDebugAll(Properties.DEBUG_MODE);
         table.setFillParent(true);
         stage.addActor(table);
     }
@@ -34,6 +37,7 @@ public abstract class Gui extends Entity
     public void onAdd()
     {
         super.onAdd();
+        Gdx.input.setInputProcessor(stage);
         onFocus();
     }
 
@@ -42,6 +46,11 @@ public abstract class Gui extends Entity
     {
         super.update(deltaTime);
         stage.act(deltaTime);
+    }
+
+    public void setInputFocus(Actor actor)
+    {
+        stage.setKeyboardFocus(actor);
     }
 
     public abstract void initialize();

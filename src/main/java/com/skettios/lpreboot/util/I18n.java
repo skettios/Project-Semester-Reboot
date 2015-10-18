@@ -20,8 +20,8 @@ public class I18n
 
     public static void reload(String langCode)
     {
-        System.out.println("RELOAD");
-        translation = getTranslation(langCode);
+        I18nContainer newTranslation = getTranslation(langCode);
+        translation = newTranslation != null ? newTranslation : translation;
     }
 
     public static String i18n(String key)
@@ -35,7 +35,10 @@ public class I18n
         for (int i = 0; i < langFiles.length; i++)
         {
             if (langFiles[i].nameWithoutExtension().equalsIgnoreCase(langCode))
+            {
+                System.out.println(langCode);
                 return new I18nContainer(langCode, langFiles[i]);
+            }
         }
 
         return null;

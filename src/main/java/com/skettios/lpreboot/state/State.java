@@ -1,22 +1,43 @@
 package com.skettios.lpreboot.state;
 
 
+import com.badlogic.gdx.utils.Timer;
+import com.skettios.lpreboot.scene.Scene;
+
 public abstract class State
 {
     private boolean isPaused = false;
+    protected Scene scene;
 
-    public State()
+    public State(Scene scene)
     {
+        this.scene = scene;
     }
 
     public void pause()
     {
-        isPaused = true;
+        Timer.schedule(new Timer.Task()
+        {
+            @Override
+            public void run()
+            {
+                isPaused = true;
+                cancel();
+            }
+        }, 0.01f);
     }
 
     public void unpause()
     {
-        isPaused = false;
+        Timer.schedule(new Timer.Task()
+        {
+            @Override
+            public void run()
+            {
+                isPaused = false;
+                cancel();
+            }
+        }, 0.01f);
     }
 
     public boolean isPaused()
@@ -24,7 +45,15 @@ public abstract class State
         return isPaused;
     }
 
+    public void clearScene()
+    {
+        scene.clearEntities();
+    }
+
     public abstract void onPush();
     public abstract void onPop();
-    public abstract void update(float deltaTime);
+    public void update(float deltaTime)
+    {
+        scene.update(deltaTime);
+    }
 }

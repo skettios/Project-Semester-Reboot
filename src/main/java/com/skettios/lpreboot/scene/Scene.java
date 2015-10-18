@@ -5,9 +5,11 @@ import com.skettios.lpreboot.entity.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Scene
+public abstract class Scene
 {
     private List<Entity> entityList = new ArrayList<Entity>();
+
+    public abstract void initialize();
 
     public void addEntity(Entity entity)
     {

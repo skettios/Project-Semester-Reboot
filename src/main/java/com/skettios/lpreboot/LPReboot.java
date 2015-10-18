@@ -50,7 +50,9 @@ public class LPReboot extends ApplicationAdapter
         renderEngine = new RenderEngine();
         stateEngine = new StateEngine();
 
-        stateEngine.pushState(States.MAIN_MENU);
+        States.initialize();
+
+        stateEngine.pushState(States.mainMenu);
     }
 
     @Override
@@ -86,7 +88,7 @@ public class LPReboot extends ApplicationAdapter
         I18n.load();
 
         VisUI.load();
-        Gdx.input.setCursorCatched(true);
+        Gdx.input.setCursorCatched(false);
     }
 
     private void handleGlobalKeyCombinations()
