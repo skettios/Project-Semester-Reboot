@@ -36,6 +36,11 @@ public class SpriteRenderer extends Renderer<SpriteRenderer>
         return type;
     }
 
+    public void setTexture(Texture texture)
+    {
+    	sprite.setTexture(texture);
+    }
+    
     @Override
     public void render(SpriteBatch batch, float deltaTime)
     {

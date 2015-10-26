@@ -1,0 +1,21 @@
+{
+	"textures": {
+		"background": "background.png",
+		"game_background": "game_background.png",
+		"player": "player.png",
+		"menu_background": "menu_background.png",
+		"textbar": "textbar.png",
+		"sidebar": "sidebar.png",
+		"death": "death.png"
+		"muertos": "death2.png"
+	},
+	"music": {
+	
+	},
+	"sounds": {
+	
+	},
+	"scripts": {
+		"player": "player_logic.lua"
+	}
+}

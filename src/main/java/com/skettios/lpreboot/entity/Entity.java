@@ -30,7 +30,8 @@ public class Entity
         components.remove(clazz).onRemove();
     }
 
-    public <T extends Component> T getComponent(Class<T> clazz)
+    @SuppressWarnings("unchecked")
+	public <T extends Component> T getComponent(Class<T> clazz)
     {
         return (T) components.get(clazz);
     }

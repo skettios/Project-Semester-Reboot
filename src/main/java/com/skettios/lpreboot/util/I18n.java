@@ -55,6 +55,11 @@ public class I18n
             translations = parseLanguageFile(langFile);
         }
 
+        public String getLangCode()
+        {
+        	return langCode;
+        }
+        
         private Map<String, String> parseLanguageFile(FileHandle langFile)
         {
             Map<String, String> ret = new HashMap<String, String>();

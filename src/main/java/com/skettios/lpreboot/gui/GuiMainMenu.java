@@ -2,7 +2,6 @@ package com.skettios.lpreboot.gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -12,12 +11,16 @@ import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisList;
 import com.skettios.lpreboot.LPReboot;
 import com.skettios.lpreboot.gfx.RenderEngine;
+import com.skettios.lpreboot.util.Assets;
 import com.skettios.lpreboot.util.I18n;
 
 public class GuiMainMenu extends Gui
 {
     private VisLabel title;
     private VisList<String> selection;
+
+    private String newGame;
+    private String exit;
 
     public GuiMainMenu()
     {
@@ -27,17 +30,19 @@ public class GuiMainMenu extends Gui
     @Override
     public void initialize()
     {
-        table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.absolute("assets/textures/menu_background.png")))));
+        table.setBackground(new TextureRegionDrawable(new TextureRegion(Assets.getTexture("menu_background"))));
 
         table.align(Align.topLeft);
 
+        newGame = I18n.i18n("gui.menu.new_game");
+        exit = I18n.i18n("gui.menu.exit");
         title = new VisLabel(I18n.i18n("gui.menu.title"));
         selection = new VisList<String>();
 
         title.setFontScale(1.05f);
         table.add(title).padTop(50).padLeft(50).expandX().align(Align.left);
         table.row();
-        selection.setItems(I18n.i18n("gui.menu.new_game"), I18n.i18n("gui.menu.exit"));
+        selection.setItems(newGame, exit);
 
         selection.addListener(new InputListener()
         {
@@ -87,5 +92,7 @@ public class GuiMainMenu extends Gui
     {
         stage.setKeyboardFocus(selection);
         title.setText(I18n.i18n("gui.menu.title"));
+        newGame = I18n.i18n("gui.menu.new_game");
+        exit = I18n.i18n("gui.menu.exit");
     }
 }

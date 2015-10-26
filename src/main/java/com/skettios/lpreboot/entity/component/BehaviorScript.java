@@ -1,23 +1,23 @@
 package com.skettios.lpreboot.entity.component;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.skettios.lpreboot.lua.LuaEngine;
+import com.skettios.lpreboot.util.Assets;
+import com.skettios.lpreboot.util.ScriptLoader.Script;
 
-public class Script extends Component
+public class BehaviorScript extends Component
 {
     private LuaEngine luaEngine;
 
-    public Script(FileHandle file)
+    public BehaviorScript(Script script)
     {
         luaEngine = new LuaEngine();
-        luaEngine.evaluateScript(file);
+        luaEngine.evaluateScript(script);
         luaEngine.callFunction("initialize", owner);
     }
 
-    public Script(String file)
+    public BehaviorScript(String alias)
     {
-        this(Gdx.files.absolute(file));
+        this(Assets.getScript(alias));
     }
 
     @Override

@@ -15,7 +15,6 @@ public class StateGame extends State
     @Override
     public void onPush()
     {
-
     }
 
     @Override

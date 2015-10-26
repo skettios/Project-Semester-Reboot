@@ -1,12 +1,13 @@
 package com.skettios.lpreboot;
 
+import java.io.File;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.SharedLibraryLoader;
 import com.kotcrab.vis.ui.VisUI;
@@ -17,8 +18,6 @@ import com.skettios.lpreboot.state.StateEngine;
 import com.skettios.lpreboot.state.States;
 import com.skettios.lpreboot.util.I18n;
 import com.skettios.lpreboot.util.Properties;
-
-import java.io.File;
 
 public class LPReboot extends ApplicationAdapter
 {
@@ -49,7 +48,7 @@ public class LPReboot extends ApplicationAdapter
 
         renderEngine = new RenderEngine();
         stateEngine = new StateEngine();
-
+        
         States.initialize();
 
         stateEngine.pushState(States.mainMenu);
@@ -88,7 +87,7 @@ public class LPReboot extends ApplicationAdapter
         I18n.load();
 
         VisUI.load();
-        Gdx.input.setCursorCatched(false);
+        Gdx.input.setCursorCatched(true);
     }
 
     private void handleGlobalKeyCombinations()

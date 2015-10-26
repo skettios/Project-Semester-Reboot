@@ -1,6 +1,12 @@
 {
     "gui": {
+		"menu": {
+            "title": "Lunatic Princess Reboot",
+            "new_game": "New Game",
+            "exit": "Exit"
+        },
         "game": {
+			"sean_mang": "Estoy ahí para ti mi ángelita."
             "player_1": "Princesa"
         }
     }

@@ -9,6 +9,9 @@ public abstract class Scene
 {
     private List<Entity> entityList = new ArrayList<Entity>();
 
+    public abstract void loadContent();
+    public abstract void unloadContent();
+    
     public abstract void initialize();
 
     public void addEntity(Entity entity)

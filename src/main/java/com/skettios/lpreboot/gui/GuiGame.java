@@ -1,13 +1,12 @@
 package com.skettios.lpreboot.gui;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.skettios.lpreboot.gfx.RenderEngine;
+import com.skettios.lpreboot.util.Assets;
 import com.skettios.lpreboot.util.I18n;
 
 public class GuiGame extends Gui
@@ -23,12 +22,12 @@ public class GuiGame extends Gui
     public void initialize()
     {
         VisTable innerTable = new VisTable();
-        innerTable.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.absolute("assets/textures/textbar.png")))));
+        innerTable.setBackground(new TextureRegionDrawable(new TextureRegion(Assets.getTexture("textbar"))));
 
-        playerName = new VisLabel(I18n.i18n("gui.game.player_1"));
+        playerName = new VisLabel(I18n.i18n("gui.game.sean_mang"));
 
         innerTable.add(playerName);
-        innerTable.align(Align.topLeft);
+        innerTable.align(Align.center);
         innerTable.padLeft(10);
         innerTable.padTop(10);
 
@@ -39,6 +38,6 @@ public class GuiGame extends Gui
     @Override
     public void onFocus()
     {
-        playerName.setText(I18n.i18n("gui.game.player_1"));
+        playerName.setText(I18n.i18n("gui.game.sean_mang"));
     }
 }

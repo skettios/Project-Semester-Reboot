@@ -1,6 +1,7 @@
 package com.skettios.lpreboot.gfx;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.*;
@@ -36,7 +37,7 @@ public class RenderEngine
     public RenderEngine()
     {
         windowView = new ScalingViewport(Scaling.fit, 800, 600);
-        gameView = new ScalingViewport(Scaling.none, 400, 570);
+        gameView = new ScalingViewport(Scaling.none, 470, 570);
 
         windowView.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
         gameView.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
@@ -122,7 +123,7 @@ public class RenderEngine
 
     public void render(float deltaTime)
     {
-        Gdx.gl.glClear(Gdx.gl20.GL_COLOR_BUFFER_BIT | Gdx.gl20.GL_DEPTH_BUFFER_BIT);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
         windowView.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
         batch.setProjectionMatrix(windowView.getCamera().combined);
@@ -131,7 +132,7 @@ public class RenderEngine
         windowBG.render(batch, deltaTime);
         batch.end();
 
-        gameView.setScreenBounds(15, 15, 400, 570);
+        gameView.setScreenBounds(15, 15, 470, 570);
         gameView.apply(true);
 
         batch.setProjectionMatrix(gameView.getCamera().combined);

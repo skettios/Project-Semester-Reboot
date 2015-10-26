@@ -8,6 +8,7 @@ public class StateEngine
 
     public void pushState(State state)
     {
+    	state.scene.loadContent();
         state.scene.initialize();
         stateStack.push(state).onPush();
     }

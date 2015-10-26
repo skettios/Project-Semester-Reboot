@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.skettios.lpreboot.entity.component.SpriteRenderer;
 import com.skettios.lpreboot.util.I18n;
 
 import javax.script.SimpleBindings;
@@ -30,5 +31,6 @@ public class LuaEngineBindings extends SimpleBindings
 
         // LPR Classes
         put("I18n", I18n.class);
+        put("SpriteRenderer", SpriteRenderer.class);
     }
 }

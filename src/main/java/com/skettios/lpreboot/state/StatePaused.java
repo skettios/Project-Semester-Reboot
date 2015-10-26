@@ -3,7 +3,6 @@ package com.skettios.lpreboot.state;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.skettios.lpreboot.LPReboot;
-import com.skettios.lpreboot.scene.Scene;
 import com.skettios.lpreboot.scene.ScenePaused;
 
 public class StatePaused extends State

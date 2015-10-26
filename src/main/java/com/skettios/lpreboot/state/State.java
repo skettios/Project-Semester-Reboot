@@ -44,9 +44,10 @@ public abstract class State
     {
         return isPaused;
     }
-
+    
     public void clearScene()
     {
+    	scene.unloadContent();
         scene.clearEntities();
     }
 

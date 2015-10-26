@@ -15,13 +15,15 @@ public abstract class Renderer<T extends Renderer<T>> extends Component implemen
         alpha = 1f;
     }
 
-    public T setColor(Color color)
+    @SuppressWarnings("unchecked")
+	public T setColor(Color color)
     {
         this.color = color;
         return (T) this;
     }
 
-    public T setAlpha(float alpha)
+    @SuppressWarnings("unchecked")
+	public T setAlpha(float alpha)
     {
         this.alpha = alpha;
         return (T) this;

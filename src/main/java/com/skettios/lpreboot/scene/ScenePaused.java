@@ -11,4 +11,18 @@ public class ScenePaused extends Scene
     {
         addEntity(gui);
     }
+
+	@Override
+	public void loadContent()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void unloadContent()
+	{
+		// TODO Auto-generated method stub
+		
+	}
 }

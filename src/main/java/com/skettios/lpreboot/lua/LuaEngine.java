@@ -6,8 +6,8 @@ import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 
-import com.badlogic.gdx.files.FileHandle;
 import com.naef.jnlua.script.LuaScriptEngineFactory;
+import com.skettios.lpreboot.util.ScriptLoader.Script;
 
 public class LuaEngine
 {
@@ -18,12 +18,12 @@ public class LuaEngine
     {
         engine.setBindings(new LuaEngineBindings(), ScriptContext.ENGINE_SCOPE);
     }
-
-    public Object evaluateScript(FileHandle handle)
+    
+    public Object evaluateScript(Script script)
     {
         try
         {
-            return ((Compilable) engine).compile(handle.reader()).eval();
+            return ((Compilable) engine).compile(script.data).eval();
         }
         catch (ScriptException e)
         {
