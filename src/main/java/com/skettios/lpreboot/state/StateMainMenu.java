@@ -1,24 +1,30 @@
 package com.skettios.lpreboot.state;
 
 import com.skettios.lpreboot.LPReboot;
-import com.skettios.lpreboot.scene.SceneMainMenu;
+import com.skettios.lpreboot.gui.GuiMainMenu;
+import com.skettios.lpreboot.util.Assets;
 
 public class StateMainMenu extends State
 {
-    public StateMainMenu()
-    {
-        super(new SceneMainMenu());
-    }
+	public GuiMainMenu gui;
 
-    @Override
-    public void onPush()
-    {
-    }
+	@Override
+	public void onLoad()
+	{
+		Assets.startLoading();
+		Assets.loadTexture("menu_background");
+		Assets.endLoading();
+		
+    	gui = new GuiMainMenu();
+        addEntity(gui);
+	}
 
-    @Override
-    public void onPop()
-    {
-        ((SceneMainMenu) scene).gui.setInputFocus(null);
-        LPReboot.getInstance().getStateEngine().pushState(States.game);
-    }
+	@Override
+	public void onUnload()
+	{
+		Assets.unloadTexture("menu_background");
+		
+        gui.setInputFocus(null);
+        LPReboot.getInstance().getStateEngine().pushState(States.game);	
+	}
 }

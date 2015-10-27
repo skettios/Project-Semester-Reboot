@@ -3,26 +3,11 @@ package com.skettios.lpreboot.state;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.skettios.lpreboot.LPReboot;
-import com.skettios.lpreboot.scene.ScenePaused;
+import com.skettios.lpreboot.gui.GuiPaused;
 
 public class StatePaused extends State
 {
-    public StatePaused()
-    {
-        super(new ScenePaused());
-    }
-
-    @Override
-    public void onPush()
-    {
-        States.game.pause();
-    }
-
-    @Override
-    public void onPop()
-    {
-        States.game.unpause();
-    }
+	public GuiPaused gui;
 
     @Override
     public void update(float deltaTime)
@@ -38,4 +23,19 @@ public class StatePaused extends State
             LPReboot.getInstance().getStateEngine().popState();
         }
     }
+
+	@Override
+	public void onLoad()
+	{
+    	gui = new GuiPaused();
+    	addEntity(gui);
+    	
+		States.game.pause();
+	}
+
+	@Override
+	public void onUnload()
+	{
+		States.game.unpause();	
+	}
 }

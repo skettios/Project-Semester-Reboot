@@ -1,15 +1,17 @@
 package com.skettios.lpreboot.entity;
 
-import com.skettios.lpreboot.entity.component.Component;
-import com.skettios.lpreboot.entity.component.Transform;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import com.skettios.lpreboot.entity.component.Component;
+import com.skettios.lpreboot.entity.component.Transform;
+import com.skettios.lpreboot.state.State;
 
 public class Entity
 {
     private Map<Class<? extends Component>, Component> components = new HashMap<Class<? extends Component>, Component>();
 
+    public State gameState;
     public Transform transform;
 
     public Entity()
