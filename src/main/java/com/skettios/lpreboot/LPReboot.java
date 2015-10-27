@@ -15,7 +15,7 @@ import com.naef.jnlua.NativeSupport;
 import com.naef.jnlua.NativeSupport.Loader;
 import com.skettios.lpreboot.gfx.RenderEngine;
 import com.skettios.lpreboot.state.StateEngine;
-import com.skettios.lpreboot.state.States;
+import com.skettios.lpreboot.state.StateMainMenu;
 import com.skettios.lpreboot.util.I18n;
 import com.skettios.lpreboot.util.Properties;
 
@@ -48,10 +48,8 @@ public class LPReboot extends ApplicationAdapter
 
         renderEngine = new RenderEngine();
         stateEngine = new StateEngine();
-        
-        States.initialize();
 
-        stateEngine.pushState(States.mainMenu);
+        stateEngine.pushState(StateMainMenu.INSTANCE);
     }
 
     @Override

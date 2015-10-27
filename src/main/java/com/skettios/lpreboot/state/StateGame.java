@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.skettios.lpreboot.LPReboot;
 import com.skettios.lpreboot.entity.Entity;
 import com.skettios.lpreboot.entity.component.BehaviorScript;
+import com.skettios.lpreboot.entity.component.RigidBody;
+import com.skettios.lpreboot.entity.component.RigidBodyDebugRenderer;
 import com.skettios.lpreboot.entity.component.SpriteRenderer;
 import com.skettios.lpreboot.gfx.RenderEngine;
 import com.skettios.lpreboot.gfx.TransitionTween;
@@ -13,10 +15,26 @@ import com.skettios.lpreboot.gfx.TransitionTween.TransitionType;
 import com.skettios.lpreboot.gui.GuiGame;
 import com.skettios.lpreboot.gui.GuiGameWindow;
 import com.skettios.lpreboot.util.Assets;
+import com.sun.java.swing.plaf.windows.resources.windows_zh_TW;
 
 public class StateGame extends State
 {
-    private Entity player = new Entity();
+	public static final StateGame INSTANCE = new StateGame();
+	
+    private Entity player = new Entity()
+	{
+    	public void onCollide(Entity entity)
+    	{
+    		entity.transform.setPosition(this.transform.position.x, this.transform.position.y);
+    	}
+	};
+    private Entity enemy = new Entity()
+	{
+    	public void onCollide(Entity entity) 
+    	{
+    		System.out.println("ENTITY COLLIDED: " + entity.transform.position);
+    	}
+	};
     private Entity gameBG = new Entity();
     private Entity windowBG = new Entity();
     private Entity seanDeath = new Entity();
@@ -26,6 +44,13 @@ public class StateGame extends State
 
     private TransitionTween transition;
 	
+    public StateGame()
+    {
+    	worldWidth = 500;
+    	worldHeight = 600;
+    	chunkSize = 100;
+    }
+    
 	@Override
 	public void onLoad()
 	{
@@ -46,12 +71,20 @@ public class StateGame extends State
     	
         player.addComponent(new SpriteRenderer(Assets.getTexture("player"), RenderEngine.RenderType.GAME_FG));
         player.addComponent(new BehaviorScript("player"));
+        player.addComponent(new RigidBody(31, 45));
+        player.addComponent(new RigidBodyDebugRenderer(player.getComponent(RigidBody.class)));
+        
+        enemy.addComponent(new SpriteRenderer(Assets.getTexture("player"), RenderEngine.RenderType.GAME_FG));
+        enemy.addComponent(new RigidBody(31, 45));
+        enemy.addComponent(new RigidBodyDebugRenderer(enemy.getComponent(RigidBody.class)));
+        
         windowBG.addComponent(new SpriteRenderer(Assets.getTexture("background"), RenderEngine.RenderType.WINDOW_BG));
         gameBG.addComponent(new SpriteRenderer(Assets.getTexture("game_background"), RenderEngine.RenderType.GAME_BG).setColor(Color.DARK_GRAY).setAlpha(0.5f));
         seanDeath.addComponent(new SpriteRenderer(Assets.getTexture("death"), RenderEngine.RenderType.GAME_BG));
         seanDeath.transform.setPosition(100, 100);
         
         addEntity(player.transform.setPosition(170, 185));
+        addEntity(enemy.transform.setPosition(200, 200));
         addEntity(windowBG);
         addEntity(gameBG);
         addEntity(guiWindow);
@@ -73,7 +106,7 @@ public class StateGame extends State
 		Assets.unloadTexture("death");
 		Assets.unloadTexture("muertos");
 		
-		LPReboot.getInstance().getStateEngine().pushState(States.mainMenu);
+		LPReboot.getInstance().getStateEngine().pushState(StateMainMenu.INSTANCE);
 	}
 	
     @Override
@@ -82,7 +115,7 @@ public class StateGame extends State
         super.update(deltaTime);
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE))
-            LPReboot.getInstance().getStateEngine().pushState(States.paused);
+            LPReboot.getInstance().getStateEngine().pushState(StatePaused.INSTANCE);
         
         if (transition.doTransition(0.005f))
         {

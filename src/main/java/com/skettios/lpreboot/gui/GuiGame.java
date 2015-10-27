@@ -24,12 +24,14 @@ public class GuiGame extends Gui
         VisTable innerTable = new VisTable();
         innerTable.setBackground(new TextureRegionDrawable(new TextureRegion(Assets.getTexture("textbar"))));
 
+        
         playerName = new VisLabel(I18n.i18n("gui.game.sean_mang"));
 
-        innerTable.add(playerName);
-        innerTable.align(Align.center);
-        innerTable.padLeft(10);
-        innerTable.padTop(10);
+        innerTable.add(new VisLabel("Sean Death")).align(Align.left).expandX();
+        innerTable.row();
+        innerTable.add(playerName).expandY();
+        innerTable.align(Align.top);
+        innerTable.pad(4, 8, 12, 4);
 
         table.align(Align.bottom);
         table.add(innerTable);

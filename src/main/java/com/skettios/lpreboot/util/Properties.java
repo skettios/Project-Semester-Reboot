@@ -61,6 +61,6 @@ public class Properties
     private static void generateDefaults()
     {
         properties.setProperty("DebugMode", Boolean.toString(false));
-        properties.setProperty("Lang", "en_US");
+        properties.setProperty("Lang", "es_MX");
     }
 }

@@ -19,7 +19,7 @@ public class BehaviorScript extends Component
     {
         this(Assets.getScript(alias));
     }
-
+    
     @Override
     public void onAdd()
     {

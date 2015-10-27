@@ -47,8 +47,6 @@ public class TransitionTween
     {
         float currAlpha = Math.max(0f, renderer.alpha - step);
         renderer.setAlpha(currAlpha);
-
-        System.out.println(currAlpha);
         
         return currAlpha == 0f;
     }

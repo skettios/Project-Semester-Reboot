@@ -12,6 +12,4 @@ function update(entity, deltaTime)
     elseif Gdx.input:isKeyPressed(Keys.DOWN) then
         entity.transform:move(0, -200 * deltaTime)
     end
-	
-	System.out:println(entity.transform.position)
 end

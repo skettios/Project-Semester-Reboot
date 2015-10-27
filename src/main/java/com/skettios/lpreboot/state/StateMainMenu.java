@@ -6,6 +6,8 @@ import com.skettios.lpreboot.util.Assets;
 
 public class StateMainMenu extends State
 {
+	public static final StateMainMenu INSTANCE = new StateMainMenu();
+	
 	public GuiMainMenu gui;
 
 	@Override
@@ -25,6 +27,6 @@ public class StateMainMenu extends State
 		Assets.unloadTexture("menu_background");
 		
         gui.setInputFocus(null);
-        LPReboot.getInstance().getStateEngine().pushState(States.game);	
+        LPReboot.getInstance().getStateEngine().pushState(StateGame.INSTANCE);	
 	}
 }
