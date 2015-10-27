@@ -128,8 +128,9 @@ task buildJar(dependsOn: classes, type: Jar) {
 	delete('build/libs')
 	
     from files(sourceSets.main.output.classesDir)
+	System.out.println(sourceSets.main.output.resourcesDir)
     from files(sourceSets.main.output.resourcesDir) {
-		excludes ['assets']
+		exclude 'assets'
 	}
     from {configurations.compile.collect {zipTree(it)}}
 
