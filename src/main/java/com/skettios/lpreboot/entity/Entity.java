@@ -1,13 +1,13 @@
 package com.skettios.lpreboot.entity;
 
+import com.skettios.lpreboot.entity.component.Component;
+import com.skettios.lpreboot.entity.component.Transform;
+import com.skettios.lpreboot.state.State;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.skettios.lpreboot.entity.component.Component;
-import com.skettios.lpreboot.entity.component.Transform;
-import com.skettios.lpreboot.state.State;
 
 //TODO(skettios): Figure out better way to call onCollide and better place for it...
 public class Entity
@@ -26,7 +26,7 @@ public class Entity
     {
         component.owner = this;
         components.put(component.getClass(), component);
-		
+
         return (T) component;
     }
 
@@ -36,35 +36,35 @@ public class Entity
     }
 
     @SuppressWarnings("unchecked")
-	public <T extends Component> T getComponent(Class<T> clazz)
+    public <T extends Component> T getComponent(Class<T> clazz)
     {
         return (T) components.get(clazz);
     }
 
     public boolean hasComponent(Class<? extends Component> clazz)
     {
-    	if (components.containsKey(clazz))
-    		return true;
-    	
-    	return false;
+        if (components.containsKey(clazz))
+            return true;
+
+        return false;
     }
-    
+
     public void onCollide(Entity entity)
     {
     }
-    
+
     public void onAdd()
     {
-    	List<Component> componentList = new ArrayList<Component>(components.values());
+        List<Component> componentList = new ArrayList<Component>(components.values());
         for (int i = 0; i < componentList.size(); i++)
-        	componentList.get(i).onAdd();
+            componentList.get(i).onAdd();
     }
 
     public void onRemove()
     {
-    	List<Component> componentList = new ArrayList<Component>(components.values());
+        List<Component> componentList = new ArrayList<Component>(components.values());
         for (int i = 0; i < componentList.size(); i++)
-        	componentList.get(i).onRemove();
+            componentList.get(i).onRemove();
     }
 
     public void update(float deltaTime)

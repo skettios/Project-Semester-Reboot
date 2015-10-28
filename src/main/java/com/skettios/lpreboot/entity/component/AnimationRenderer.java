@@ -26,7 +26,7 @@ public class AnimationRenderer extends Renderer<AnimationRenderer>
     }
 
     protected class Animation
-    {	
+    {
         public Animation()
         {
         }

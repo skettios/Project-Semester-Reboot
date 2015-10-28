@@ -7,6 +7,8 @@ public abstract class Component
     public Entity owner;
 
     public abstract void onAdd();
+
     public abstract void onRemove();
+
     public abstract void update(float deltaTime);
 }

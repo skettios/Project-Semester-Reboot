@@ -5,6 +5,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.utils.Timer;
+import com.skettios.lpreboot.entity.EntityBullet;
 import com.skettios.lpreboot.entity.component.SpriteRenderer;
 import com.skettios.lpreboot.util.I18n;
 
@@ -30,6 +32,9 @@ public class LuaEngineBindings extends SimpleBindings
         put("Texture", Texture.class);
 
         // LPR Classes
+        put("EntityBullet", EntityBullet.class);
+        put("Timer", Timer.class);
+        put("Task", Timer.Task.class);
         put("I18n", I18n.class);
         put("SpriteRenderer", SpriteRenderer.class);
     }

@@ -54,5 +54,6 @@ public abstract class Gui extends Entity
     }
 
     public abstract void initialize();
+
     public abstract void onFocus();
 }

@@ -1,13 +1,9 @@
 package com.skettios.lpreboot.lua;
 
-import javax.script.Compilable;
-import javax.script.Invocable;
-import javax.script.ScriptContext;
-import javax.script.ScriptEngine;
-import javax.script.ScriptException;
-
 import com.naef.jnlua.script.LuaScriptEngineFactory;
 import com.skettios.lpreboot.util.ScriptLoader.Script;
+
+import javax.script.*;
 
 public class LuaEngine
 {
@@ -18,7 +14,7 @@ public class LuaEngine
     {
         engine.setBindings(new LuaEngineBindings(), ScriptContext.ENGINE_SCOPE);
     }
-    
+
     public Object evaluateScript(Script script)
     {
         try

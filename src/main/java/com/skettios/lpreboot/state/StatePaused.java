@@ -7,9 +7,9 @@ import com.skettios.lpreboot.gui.GuiPaused;
 
 public class StatePaused extends State
 {
-	public static final StatePaused INSTANCE = new StatePaused();
-	
-	public GuiPaused gui;
+    public static final StatePaused INSTANCE = new StatePaused();
+
+    public GuiPaused gui;
 
     @Override
     public void update(float deltaTime)
@@ -26,18 +26,18 @@ public class StatePaused extends State
         }
     }
 
-	@Override
-	public void onLoad()
-	{
-    	gui = new GuiPaused();
-    	addEntity(gui);
-    	
-		StateGame.INSTANCE.pause();
-	}
+    @Override
+    public void onLoad()
+    {
+        gui = new GuiPaused();
+        addEntity(gui);
 
-	@Override
-	public void onUnload()
-	{
-		StateGame.INSTANCE.unpause();	
-	}
+        StateGame.INSTANCE.pause();
+    }
+
+    @Override
+    public void onUnload()
+    {
+        StateGame.INSTANCE.unpause();
+    }
 }

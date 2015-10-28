@@ -12,4 +12,8 @@ function update(entity, deltaTime)
     elseif Gdx.input:isKeyPressed(Keys.DOWN) then
         entity.transform:move(0, -200 * deltaTime)
     end
+
+    if Gdx.input:isKeyPressed(Keys.Z) then
+        entity.gameState:addEntity(EntityBullet:new().transform:setPosition(entity.transform.position.x, entity.transform.position.y))
+    end
 end

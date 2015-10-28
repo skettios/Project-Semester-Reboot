@@ -1,7 +1,5 @@
 package com.skettios.lpreboot;
 
-import java.io.File;
-
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
@@ -18,6 +16,8 @@ import com.skettios.lpreboot.state.StateEngine;
 import com.skettios.lpreboot.state.StateMainMenu;
 import com.skettios.lpreboot.util.I18n;
 import com.skettios.lpreboot.util.Properties;
+
+import java.io.File;
 
 public class LPReboot extends ApplicationAdapter
 {
@@ -57,10 +57,10 @@ public class LPReboot extends ApplicationAdapter
     {
         // Update
         handleGlobalKeyCombinations();
-        stateEngine.update(1f / 60f);
+        stateEngine.update(Gdx.graphics.getDeltaTime());
 
         // Render
-        renderEngine.render(1f / 60f);
+        renderEngine.render(Gdx.graphics.getDeltaTime());
     }
 
     public static LPReboot getInstance()

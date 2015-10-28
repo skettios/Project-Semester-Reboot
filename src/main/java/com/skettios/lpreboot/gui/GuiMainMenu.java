@@ -51,10 +51,8 @@ public class GuiMainMenu extends Gui
             @Override
             public boolean keyDown(InputEvent event, int keycode)
             {
-                System.out.println(keycode);
                 if (keycode == Input.Keys.DOWN)
                 {
-                    System.out.println("TEST");
                     if (currentIndex <= selection.getSelection().size() - 1)
                         currentIndex++;
                     else

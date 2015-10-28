@@ -6,8 +6,9 @@
 		"menu_background": "menu_background.png",
 		"textbar": "textbar.png",
 		"sidebar": "sidebar.png",
-		"death": "death.png"
-		"muertos": "death2.png"
+		"death": "death.png",
+		"muertos": "death2.png",
+		"player_bullet": "player_bullet.png"
 	},
 	"music": {
 	

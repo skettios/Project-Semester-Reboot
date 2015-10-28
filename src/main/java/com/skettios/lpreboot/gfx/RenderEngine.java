@@ -4,7 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Scaling;
-import com.badlogic.gdx.utils.viewport.*;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class RenderEngine
         WINDOW_FG,
         WINDOW_GUI,
         GAME_BG,
+        GAME_MG,
         GAME_FG,
         GAME_GUI
     }
@@ -31,6 +33,7 @@ public class RenderEngine
     private RenderLayer windowFG;
     private RenderLayer windowGUI;
     private RenderLayer gameBG;
+    private RenderLayer gameMG;
     private RenderLayer gameFG;
     private RenderLayer gameGUI;
 
@@ -46,6 +49,7 @@ public class RenderEngine
 
         layers.add(windowBG = new RenderLayer(RenderType.WINDOW_BG));
         layers.add(gameBG = new RenderLayer(RenderType.GAME_BG));
+        layers.add(gameMG = new RenderLayer(RenderType.GAME_MG));
         layers.add(gameFG = new RenderLayer(RenderType.GAME_FG));
         layers.add(gameGUI = new RenderLayer(RenderType.GAME_GUI));
         layers.add(windowFG = new RenderLayer(RenderType.WINDOW_FG));
@@ -83,6 +87,9 @@ public class RenderEngine
             case GAME_BG:
                 gameBG.add(renderer);
                 break;
+            case GAME_MG:
+                gameMG.add(renderer);
+                break;
             case GAME_FG:
                 gameFG.add(renderer);
                 break;
@@ -109,6 +116,9 @@ public class RenderEngine
                 break;
             case GAME_BG:
                 gameBG.remove(renderer);
+                break;
+            case GAME_MG:
+                gameMG.remove(renderer);
                 break;
             case GAME_FG:
                 gameFG.remove(renderer);
@@ -139,6 +149,7 @@ public class RenderEngine
 
         batch.begin();
         gameBG.render(batch, deltaTime);
+        gameMG.render(batch, deltaTime);
         gameFG.render(batch, deltaTime);
         batch.end();
 

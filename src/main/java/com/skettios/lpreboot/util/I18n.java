@@ -36,7 +36,6 @@ public class I18n
         {
             if (langFiles[i].nameWithoutExtension().equalsIgnoreCase(langCode))
             {
-                System.out.println(langCode);
                 return new I18nContainer(langCode, langFiles[i]);
             }
         }
@@ -57,9 +56,9 @@ public class I18n
 
         public String getLangCode()
         {
-        	return langCode;
+            return langCode;
         }
-        
+
         private Map<String, String> parseLanguageFile(FileHandle langFile)
         {
             Map<String, String> ret = new HashMap<String, String>();

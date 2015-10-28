@@ -6,27 +6,27 @@ import com.skettios.lpreboot.util.Assets;
 
 public class StateMainMenu extends State
 {
-	public static final StateMainMenu INSTANCE = new StateMainMenu();
-	
-	public GuiMainMenu gui;
+    public static final StateMainMenu INSTANCE = new StateMainMenu();
 
-	@Override
-	public void onLoad()
-	{
-		Assets.startLoading();
-		Assets.loadTexture("menu_background");
-		Assets.endLoading();
-		
-    	gui = new GuiMainMenu();
+    public GuiMainMenu gui;
+
+    @Override
+    public void onLoad()
+    {
+        Assets.startLoading();
+        Assets.loadTexture("menu_background");
+        Assets.endLoading();
+
+        gui = new GuiMainMenu();
         addEntity(gui);
-	}
+    }
 
-	@Override
-	public void onUnload()
-	{
-		Assets.unloadTexture("menu_background");
-		
+    @Override
+    public void onUnload()
+    {
+        Assets.unloadTexture("menu_background");
+
         gui.setInputFocus(null);
-        LPReboot.getInstance().getStateEngine().pushState(StateGame.INSTANCE);	
-	}
+        LPReboot.getInstance().getStateEngine().pushState(StateGame.INSTANCE);
+    }
 }

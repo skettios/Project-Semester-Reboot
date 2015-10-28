@@ -7,7 +7,7 @@ import com.skettios.lpreboot.gfx.RenderEngine;
 
 public class SpriteRenderer extends Renderer<SpriteRenderer>
 {
-    private Sprite sprite;
+    public Sprite sprite;
     private RenderEngine.RenderType type;
 
     public SpriteRenderer(Sprite sprite, RenderEngine.RenderType type)
@@ -38,9 +38,9 @@ public class SpriteRenderer extends Renderer<SpriteRenderer>
 
     public void setTexture(Texture texture)
     {
-    	sprite.setTexture(texture);
+        sprite.setTexture(texture);
     }
-    
+
     @Override
     public void render(SpriteBatch batch, float deltaTime)
     {
