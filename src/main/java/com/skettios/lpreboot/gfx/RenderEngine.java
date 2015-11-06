@@ -45,7 +45,7 @@ public class RenderEngine
         windowView.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
         gameView.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
 
-        gameView.getCamera().position.set(0, 0, 0);
+        gameView.getCamera().position.set(-10, -10, 0);
 
         layers.add(windowBG = new RenderLayer(RenderType.WINDOW_BG));
         layers.add(gameBG = new RenderLayer(RenderType.GAME_BG));
@@ -143,6 +143,7 @@ public class RenderEngine
         batch.end();
 
         gameView.setScreenBounds(15, 15, 470, 570);
+//        gameView.setScreenBounds(15, 15, 800, 600);
         gameView.apply(true);
 
         batch.setProjectionMatrix(gameView.getCamera().combined);

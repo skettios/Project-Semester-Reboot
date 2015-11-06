@@ -85,7 +85,7 @@ public class LPReboot extends ApplicationAdapter
         I18n.load();
 
         VisUI.load();
-        Gdx.input.setCursorCatched(true);
+        Gdx.input.setCursorCatched(false);
     }
 
     private void handleGlobalKeyCombinations()

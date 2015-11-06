@@ -12,11 +12,10 @@ public abstract class State
 {
     private List<Entity> entityList = new ArrayList<Entity>();
     private List<CollisionChunk> chunks;
+    private boolean isPaused = false;
 
     protected int worldWidth, worldHeight, chunkSize;
     protected boolean processCollisions = false;
-
-    private boolean isPaused = false;
 
     public State()
     {
@@ -31,8 +30,8 @@ public abstract class State
         {
             chunks = new ArrayList<CollisionChunk>();
 
-            for (int i = 0; i < worldWidth; i += chunkSize)
-                for (int j = 0; j < worldHeight; j += chunkSize)
+            for (int i = -chunkSize; i < worldWidth + chunkSize; i += chunkSize)
+                for (int j = -chunkSize; j < worldHeight + chunkSize; j += chunkSize)
                     chunks.add(new CollisionChunk(i, j, chunkSize));
         }
 
@@ -45,7 +44,6 @@ public abstract class State
         {
             chunks.clear();
             chunks = null;
-            System.gc();
         }
 
         clearEntities();

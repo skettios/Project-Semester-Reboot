@@ -25,4 +25,12 @@ public class EntityPlayer extends Entity
         body.info.collisionMask = Constants.Collisions.MASK_PLAYER_BOUNDS;
         addComponent(new RigidBodyDebugRenderer(body));
     }
+
+    @Override
+    public void update(float deltaTime)
+    {
+        super.update(deltaTime);
+
+        System.out.println(transform.position);
+    }
 }

@@ -26,10 +26,18 @@ public class EntityBullet extends Entity
         gameState.removeEntity(this);
     }
 
+    float x = 0, y = 0, angle = 0, radius = 0;
+
     @Override
     public void update(float deltaTime)
     {
         super.update(deltaTime);
-        transform.move(0, 10);
+        transform.move(x, y);
+
+        y = radius * (float) Math.sin(Math.toRadians(angle));
+        x = radius * (float) Math.cos(Math.toRadians(angle));
+
+        radius += 0.25f;
+        angle += 10f;
     }
 }

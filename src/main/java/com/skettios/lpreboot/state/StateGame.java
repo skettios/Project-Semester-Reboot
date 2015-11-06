@@ -71,7 +71,7 @@ public class StateGame extends State
         seanDeath.transform.setPosition(100, 100);
 
         addEntity(player.transform.setPosition(170, 185));
-        addEntity(enemy.transform.setPosition(200, 300));
+//        addEntity(enemy.transform.setPosition(200, 300));
         addEntity(windowBG);
         addEntity(gameBG);
         addEntity(guiWindow);
