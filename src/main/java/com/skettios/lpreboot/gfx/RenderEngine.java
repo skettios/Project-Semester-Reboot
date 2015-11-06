@@ -10,6 +10,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.lwjgl.opengl.GL11;
+
 public class RenderEngine
 {
     public enum RenderType
@@ -133,7 +135,8 @@ public class RenderEngine
 
     public void render(float deltaTime)
     {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+    	GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
         windowView.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
         batch.setProjectionMatrix(windowView.getCamera().combined);
@@ -147,7 +150,7 @@ public class RenderEngine
 
         batch.setProjectionMatrix(gameView.getCamera().combined);
 
-        Gdx.gl.glClear(GL20.GL_DEPTH_BUFFER_BIT);
+        GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
         
         batch.begin();
         gameBG.render(batch, deltaTime);
