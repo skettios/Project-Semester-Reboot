@@ -136,7 +136,6 @@ public class RenderEngine
     public void render(float deltaTime)
     {
     	GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
         windowView.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
         batch.setProjectionMatrix(windowView.getCamera().combined);
