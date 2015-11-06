@@ -129,7 +129,9 @@ public class LPReboot extends ApplicationAdapter
                 {
                     if (SharedLibraryLoader.is64Bit)
                     {
-                        // TODO(skettios): GET 64-BIT LUA LINUX BINARIES
+                    	nativesDir = loader.extractFile("linux/x64/liblua5.2.so", null).getParentFile();
+                    	loader.extractFile("linux/x64/libjnlua5.2.so", nativesDir.getName());
+                    	loader.extractFile("linux/x64/javavm.so", nativesDir.getName());
                     }
                     else
                     {
@@ -160,9 +162,18 @@ public class LPReboot extends ApplicationAdapter
                 @Override
                 public void load()
                 {
-                    System.load(finalNativesDir.getAbsolutePath() + "/lua52.dll");
-                    System.load(finalNativesDir.getAbsolutePath() + "/jnlua52.dll");
-                    System.load(finalNativesDir.getAbsolutePath() + "/javavm.dll");
+                	if (SharedLibraryLoader.isWindows)
+                	{
+	                    System.load(finalNativesDir.getAbsolutePath() + "/lua52.dll");
+	                    System.load(finalNativesDir.getAbsolutePath() + "/jnlua52.dll");
+	                    System.load(finalNativesDir.getAbsolutePath() + "/javavm.dll");
+                	}
+                	else if (SharedLibraryLoader.isLinux)
+                	{
+                		System.load(finalNativesDir.getAbsolutePath() + "/liblua5.2.so");
+                		System.load(finalNativesDir.getAbsolutePath() + "/libjnlua5.2.so");
+                		System.load(finalNativesDir.getAbsolutePath() + "/javavm.so");
+                	}
                 }
             });
         }
