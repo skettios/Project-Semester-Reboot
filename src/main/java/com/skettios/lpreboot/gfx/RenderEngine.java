@@ -143,11 +143,12 @@ public class RenderEngine
         batch.end();
 
         gameView.setScreenBounds(15, 15, 470, 570);
-//        gameView.setScreenBounds(15, 15, 800, 600);
         gameView.apply(true);
 
         batch.setProjectionMatrix(gameView.getCamera().combined);
 
+        Gdx.gl.glClear(GL20.GL_DEPTH_BUFFER_BIT);
+        
         batch.begin();
         gameBG.render(batch, deltaTime);
         gameMG.render(batch, deltaTime);
